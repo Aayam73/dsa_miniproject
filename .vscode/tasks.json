@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build SFML Project",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-g",
+        "${workspaceFolder}/main.cpp",
+        "${workspaceFolder}/arrayVisualizer.cpp",
+        "${workspaceFolder}/sortingAlgorithms.cpp",
+        "-o",
+        "${workspaceFolder}/main.exe",
+        "-I", "C:/SFML-2.6.2/SFML-2.6.2-windows-gcc-13.1.0-mingw-64-bit/SFML-2.6.2/include",
+        "-I", "${workspaceFolder}",
+        "-L", "C:/SFML-2.6.2/SFML-2.6.2-windows-gcc-13.1.0-mingw-64-bit/SFML-2.6.2/lib",
+        "-lsfml-graphics",
+        "-lsfml-window",
+        "-lsfml-system",
+        "-lopengl32",
+        "-lfreetype",
+        "-lwinmm",
+        "-lgdi32"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
