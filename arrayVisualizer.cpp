@@ -38,32 +38,51 @@ void ArrayVisualizer::run() {
 // ------------------ Boxes ------------------
 void ArrayVisualizer::initBoxes() {
     arrayBoxes.clear();
+    
+    // Centering calculations
+    int totalCols = cols;
+    int totalRows = (array.size() + cols - 1) / cols;
+    float arrayWidth = totalCols * (boxSize + spacing) - spacing;
+    float arrayHeight = totalRows * (boxSize + spacing) - spacing;
+
+    float offsetX = (800 - arrayWidth) / 2;   // 800 is array section width (leaving 400px for buttons)
+    float offsetY = 150;                      // start below buttons (leave top margin)
+
     for (size_t i = 0; i < array.size(); ++i) {
         Box b;
         int row = i / cols;
         int col = i % cols;
         b.rect = sf::RectangleShape(sf::Vector2f(boxSize, boxSize));
         b.rect.setFillColor(sf::Color::Red);
-        b.rect.setPosition(col * (boxSize + spacing), row * (boxSize + spacing));
+        b.rect.setPosition(offsetX + col * (boxSize + spacing), offsetY + row * (boxSize + spacing));
 
         b.label.setFont(font);
         b.label.setString(std::to_string(array[i]));
         b.label.setCharacterSize(16);
         b.label.setFillColor(sf::Color::White);
-        b.label.setPosition(col * (boxSize + spacing) + 8, row * (boxSize + spacing) + 8);
+        b.label.setPosition(offsetX + col * (boxSize + spacing) + 8, offsetY + row * (boxSize + spacing) + 8);
 
         arrayBoxes.push_back(b);
     }
 }
 
 void ArrayVisualizer::updateBoxes() {
+    int totalCols = cols;
+    int totalRows = (array.size() + cols - 1) / cols;
+    float arrayWidth = totalCols * (boxSize + spacing) - spacing;
+    float arrayHeight = totalRows * (boxSize + spacing) - spacing;
+
+    float offsetX = (800 - arrayWidth) / 2;
+    float offsetY = 150;
+
     for (size_t i = 0; i < array.size(); ++i) {
         int row = i / cols;
         int col = i % cols;
+
         arrayBoxes[i].label.setString(std::to_string(array[i]));
         arrayBoxes[i].rect.setFillColor(sf::Color::Red);
-        arrayBoxes[i].rect.setPosition(col * (boxSize + spacing), row * (boxSize + spacing));
-        arrayBoxes[i].label.setPosition(col * (boxSize + spacing) + 8, row * (boxSize + spacing) + 8);
+        arrayBoxes[i].rect.setPosition(offsetX + col * (boxSize + spacing), offsetY + row * (boxSize + spacing));
+        arrayBoxes[i].label.setPosition(offsetX + col * (boxSize + spacing) + 8, offsetY + row * (boxSize + spacing) + 8);
     }
 }
 
